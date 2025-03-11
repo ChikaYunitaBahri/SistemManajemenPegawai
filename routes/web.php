@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [EmployeeController::class, 'index'])->name('tampilan.pegawai');
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('tampilan.tambah');
+Route::post('/employees/create', [EmployeeController::class, 'store'])->name('tambah.pegawai');
+Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('tampilan.edit');
+Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('edit.pegawai');
+Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('hapus.destroy');
