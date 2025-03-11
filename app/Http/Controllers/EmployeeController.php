@@ -33,35 +33,35 @@ class EmployeeController extends Controller
         ]);
 
         return redirect()->route('tampilan.pegawai')->with('success', 'Pegawai berhasil ditambahkan');
-        }
+    }
 
-        public function edit($id)
-        {
-            $employee = Employee::findOrFail($id);
-            return view('employees.edit', compact('employee'));
-        }
+    public function edit($id)
+    {
+        $employee = Employee::findOrFail($id);
+        return view('employees.edit', compact('employee'));
+    }
 
-        public function update(Request $request, $id)
-        {
-            $request->validate([
-                'name' => 'required',
-                'position' => 'required',
-                'salary' => 'required|numeric',
-            ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'position' => 'required',
+            'salary' => 'required|numeric',
+        ]);
 
-            $employee = Employee::findOrFail($id);
-            $employee->update([
-                'name' => $request->name,
-                'position' => $request->position,
-                'salary' => $request->salary,
-            ]);
+        $employee = Employee::findOrFail($id);
+        $employee->update([
+            'name' => $request->name,
+            'position' => $request->position,
+            'salary' => $request->salary,
+        ]);
 
-            return redirect()->route('tampilan.pegawai')->with('success', 'Pegawai berhasil diperbarui');
-                }
+        return redirect()->route('tampilan.pegawai')->with('success', 'Pegawai berhasil diperbarui');
+    }
 
-                public function destroy($id)
-                {
-                    Employee::destroy($id);
-                    return redirect()->route('tampilan.pegawai') >with('success', 'Pegawai berhasil dihapus');
-                }
-            }
+    public function destroy($id)
+    {
+        Employee::destroy($id);
+        return redirect()->route('tampilan.pegawai')->with('success', 'Pegawai berhasil dihapus');
+    }
+}
