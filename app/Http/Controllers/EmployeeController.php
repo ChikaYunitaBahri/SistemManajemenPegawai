@@ -61,7 +61,9 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
-        Employee::destroy($id);
-        return redirect()->route('tampilan.pegawai')->with('success', 'Pegawai berhasil dihapus');
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+        return redirect()->route('tampilan.index')->with('success', 'Pegawai berhasil dihapus.');
     }
+
 }
